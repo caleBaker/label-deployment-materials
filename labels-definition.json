@@ -1,0 +1,119 @@
+[
+  {
+    "Name": "Public",
+    "Group": "",
+    "VisibleTo": "All users",
+    "Description": "Use this for public information",
+    "CorrectUses": [
+      "Marketing materials",
+      "Website components"
+    ],
+    "IncorrectUses": [
+      "Don't use this for internal or confidential information that should not be uploaded to our website.",
+      "Don't use this label to bypass security controls. If you need to share something with external parties, use the 'Specific People' label."
+    ],
+    "QuickNotes": [],
+    "Screenshots": [
+      {
+        "Path": "./Screenshots/labelscreenshot.png",
+        "Caption": "The Sensitivity button on the Home ribbon",
+        "Description": "Open the document and select **Sensitivity** on the Home tab of the ribbon. The same button appears in Word, Excel, PowerPoint and Outlook."
+      },
+      {
+        "Path": "./Screenshots/labelscreenshot.png",
+        "Caption": "Choosing the Public label from the menu",
+        "Description": [
+          "Pick **Public** from the list. The label name appears in the status bar at the bottom of the window once it is applied.",
+          "If you do not see the Public label, your account may not be in scope for it; see the *Troubleshooting & FAQ* page."
+        ]
+      },
+      {
+        "Path": "./Screenshots/labelscreenshot.png",
+        "Caption": "The applied label shown in the status bar"
+      }
+    ]
+  },
+  {
+    "Name": "External",
+    "Group": "",
+    "VisibleTo": "All users",
+    "Description": "Use this label for information that can be shared externally.",
+    "CorrectUses": [
+      "Information intended for external distribution",
+      "Partner data that is not sensitive and can be shared broadly with external parties."
+    ],
+    "IncorrectUses": [
+      "Don't use this for public information. External information labeled may not be something we'd publish on our website for example.",
+      "Don't use this label to send sensitive information to a specific external party."
+    ],
+    "QuickNotes": [],
+    "Screenshots": null
+  },
+  {
+    "Name": "Internal",
+    "Group": "",
+    "VisibleTo": "All users",
+    "Description": "Use this label for internal assets that should not be shared externally.",
+    "CorrectUses": [
+      "Internal assets and communications",
+      "Partner data that is not sensitive and can be shared within the organization."
+    ],
+    "IncorrectUses": [
+      "Don't use this for public information.",
+      "Don't share data with this label externally."
+    ],
+    "QuickNotes": [],
+    "Screenshots": [
+      "./Screenshots/labelscreenshot.png"
+    ]
+  },
+  {
+    "Name": "All Employees",
+    "Group": "Confidential",
+    "VisibleTo": "All users",
+    "Description": "Confidential information for all employees",
+    "CorrectUses": [
+      "Sensitive business information that all users can see",
+      "Internal communications",
+      "Company-wide announcements or product information that is not public but should be shared with all employees"
+    ],
+    "IncorrectUses": [],
+    "QuickNotes": [
+      "All employees have editor rights on documents with this label. However, this does not share items with all employees. If items exist in SharePoint or OneDrive, using this label does not grant them access."
+    ],
+    "Screenshots": null
+  },
+  {
+    "Name": "Specific People",
+    "Group": "Confidential",
+    "VisibleTo": "All users",
+    "Description": "Securely collaborate internally or externally with this label. Permissions will be configured by users.",
+    "CorrectUses": [
+      "Partner document that only they should see",
+      "Sensitive data that needs to go across department boundaries"
+    ],
+    "IncorrectUses": [],
+    "QuickNotes": [
+      "This label cannot be used in the web verisons of Office apps. Use the desktop versions of Word, Excel, or PowerPoint to apply this label."
+    ],
+    "Screenshots": null
+  },
+  {
+    "Name": "People Ops",
+    "Group": "Confidential",
+    "VisibleTo": "People Ops",
+    "Description": "Use this for People Ops sensitive data",
+    "CorrectUses": [
+      "Employee payroll information",
+      "Personal information (PII) of employees",
+      "Employee performance reviews"
+    ],
+    "IncorrectUses": [
+      "Labeling all People Ops data with this label."
+    ],
+    "QuickNotes": [
+      "This label automatically grants users in People Ops access to the content. If you need to share this information with someone outside of People Ops, use the 'Specific People' label."
+    ],
+    "Screenshots": null
+  }
+]
