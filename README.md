@@ -2,17 +2,36 @@
 
 Builds a SharePoint Online communication site for sensitivity label training via Microsoft Graph.
 
-## Contents
+## Structure
 
-- `New-LabelTrainingSite.ps1` – PowerShell 7 script that signs in with delegated Graph permissions, creates the site, uploads images, and generates the Overview, Labels, per-label, and Troubleshooting pages.
-- `overview-outline.md` / `troubleshooting-outline.md` – Markdown sources for the Overview and Troubleshooting & FAQ pages.
-- `labels-definition.json` – Label names, descriptions, correct/incorrect uses, and screenshot references.
-- `Backgrounds/`, `Screenshots/` – Images uploaded to the site.
+```
+label-deployment-materials/
+│
+├── New-LabelTrainingSite.ps1
+├── labels-definition.json - Template provided
+├── overview-outline.md - Template provided
+├── troubleshooting-outline.md - Template provided
+│
+├── Backgrounds/
+│   ├── home-background.jpg
+│   ├── labels-background.jpg
+│   └── troubleshooting-background.jpg
+│
+├── Screenshots/
+│   └── Place your screenshots here and reference in labels-definition.json
+│
+└── Logs/ - New Logs directory will be created on initial run
+    └── New-LabelTrainingSite_yyyyMMdd-HHmmss.txt
+```
 
 ## Usage
 
 ```powershell
-pwsh ./New-LabelTrainingSite.ps1
+./New-LabelTrainingSite.ps1 -SiteTitle 'Sensitvity Label Knowledge Base' -SiteAlias 'sensitivitylabels' -TenantHostName 'companyname.sharepoint.com' -OwnerUpn 'placeholder@companyname.com' -LabelDefinitionPath ./labels-definition.json
 ```
 
-Requires PowerShell 7+ and `Microsoft.Graph.Authentication` (installed automatically if missing). Run logs are written to `Logs/`.
+Requires PowerShell 7+ and `Microsoft.Graph.Authentication` (installed automatically if missing).
+
+## License
+
+[MIT](LICENSE)
