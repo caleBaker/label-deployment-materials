@@ -15,12 +15,12 @@
     "QuickNotes": [],
     "Screenshots": [
       {
-        "Path": "./Screenshots/labelscreenshot.png",
+        "Path": "./screenshots/labelscreenshot.png",
         "Caption": "The Sensitivity button on the Home ribbon",
         "Description": "Open the document and select **Sensitivity** on the Home tab of the ribbon. The same button appears in Word, Excel, PowerPoint and Outlook."
       },
       {
-        "Path": "./Screenshots/labelscreenshot.png",
+        "Path": "./screenshots/labelscreenshot.png",
         "Caption": "Choosing the Public label from the menu",
         "Description": [
           "Pick **Public** from the list. The label name appears in the status bar at the bottom of the window once it is applied.",
@@ -28,7 +28,7 @@
         ]
       },
       {
-        "Path": "./Screenshots/labelscreenshot.png",
+        "Path": "./screenshots/labelscreenshot.png",
         "Caption": "The applied label shown in the status bar"
       }
     ]
@@ -64,7 +64,7 @@
     ],
     "QuickNotes": [],
     "Screenshots": [
-      "./Screenshots/labelscreenshot.png"
+      "./screenshots/labelscreenshot.png"
     ]
   },
   {

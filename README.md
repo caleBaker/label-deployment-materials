@@ -8,17 +8,19 @@ Builds a SharePoint Online communication site for sensitivity label training via
 label-deployment-materials/
 │
 ├── New-LabelTrainingSite.ps1
-├── labels-definition.json - Template provided
-├── overview-outline.md - Template provided
-├── troubleshooting-outline.md - Template provided
 │
-├── Backgrounds/
+├── dependencies/
+│   ├── labels-definition.json - Template provided
+│   ├── overview-outline.md - Template provided
+│   └── troubleshooting-outline.md - Template provided
+│
+├── backgrounds/
 │   ├── home-background.jpg
 │   ├── labels-background.jpg
 │   └── troubleshooting-background.jpg
 │
-├── Screenshots/
-│   └── Place your screenshots here and reference in labels-definition.json
+├── screenshots/
+│   └── Place your screenshots here and reference in dependencies/labels-definition.json
 │
 └── Logs/ - New Logs directory will be created on initial run
     └── New-LabelTrainingSite_yyyyMMdd-HHmmss.txt
@@ -68,8 +70,10 @@ An administrator may need to consent to `Sites.Create.All` once for the Microsof
 ## Usage
 
 ```powershell
-./New-LabelTrainingSite.ps1 -SiteTitle 'Sensitivity Label Knowledge Base' -SiteAlias 'sensitivitylabels' -TenantHostName 'companyname.sharepoint.com' -OwnerUpn 'placeholder@companyname.com' -LabelDefinitionPath ./labels-definition.json
+./New-LabelTrainingSite.ps1 -SiteTitle 'Sensitivity Label Knowledge Base' -SiteAlias 'sensitivitylabels' -TenantHostName 'companyname.sharepoint.com' -OwnerUpn 'placeholder@companyname.com'
 ```
+
+The script reads the label definitions and both outlines from `dependencies/` by default. Pass `-LabelDefinitionPath`, `-OverviewContentPath` or `-TroubleshootingContentPath` to use other files; relative paths are resolved against the script folder.
 
 ## License
 

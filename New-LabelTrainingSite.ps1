@@ -81,30 +81,31 @@
 
 .PARAMETER OverviewContentPath
     Markdown file whose '##' sections become the Overview page sections.
-    Defaults to 'overview-outline.md' beside this script.
+    Defaults to 'dependencies/overview-outline.md' beside this script.
 
 .PARAMETER TroubleshootingContentPath
     Markdown file whose '##' sections become the Troubleshooting & FAQ page sections.
     Lines starting with 'Q:' and 'A:' are rendered as question/answer pairs.
-    Defaults to 'troubleshooting-outline.md' beside this script.
+    Defaults to 'dependencies/troubleshooting-outline.md' beside this script.
 
 .PARAMETER HomeBackgroundPath
     Image shown in a full-width image web part at the top of the Overview (home) page.
-    Defaults to 'Backgrounds/Home-background.jpg' beside this script. Pass an empty
+    Defaults to 'backgrounds/home-background.jpg' beside this script. Pass an empty
     string to build the page without a background image.
 
 .PARAMETER LabelsBackgroundPath
     Image shown in a full-width image web part at the top of the Labels page.
-    Defaults to 'Backgrounds/Labels-background.jpg' beside this script. Pass an empty
+    Defaults to 'backgrounds/labels-background.jpg' beside this script. Pass an empty
     string to build the page without a background image.
 
 .PARAMETER TroubleshootingBackgroundPath
     Image shown in a full-width image web part at the top of the Troubleshooting & FAQ
-    page. Defaults to 'Backgrounds/Troubleshooting-background.jpg' beside this script.
+    page. Defaults to 'backgrounds/troubleshooting-background.jpg' beside this script.
     Pass an empty string to build the page without a background image.
 
 .PARAMETER LabelDefinitionPath
-    Required JSON file describing the labels. Shape:
+    JSON file describing the labels. Defaults to 'dependencies/labels-definition.json'
+    beside this script; a relative path is resolved against the script folder. Shape:
         [
           {
             "Name":          "Highly Confidential",
@@ -129,6 +130,7 @@
     optional Caption (plain text shown directly beneath the image) and Description
     (a paragraph, or an array of paragraphs, shown below the caption; accepts the same
     inline markdown as the outlines: links, **bold**, *italic*, `code`).
+    Screenshot paths are resolved against the script folder, not the JSON file's folder.
     The file must contain at least one label.
 
 .PARAMETER OverviewPageName
@@ -152,16 +154,16 @@
 
 .EXAMPLE
     ./New-LabelTrainingSite.ps1 -SiteTitle 'Sensitivity Label Training' `
-        -SiteAlias 'label-training' -TenantHostName 'contoso.sharepoint.com' `
-        -LabelDefinitionPath ./labels-definition.json
+        -SiteAlias 'label-training' -TenantHostName 'contoso.sharepoint.com'
 
     Creates the site, owned by the account that signs in, and builds every page from
-    the label JSON plus overview-outline.md and troubleshooting-outline.md.
+    dependencies/labels-definition.json, dependencies/overview-outline.md and
+    dependencies/troubleshooting-outline.md.
 
 .EXAMPLE
     ./New-LabelTrainingSite.ps1 -SiteTitle 'Sensitivity Label Knowledge Base' `
         -SiteAlias 'sensitivitylabels' -TenantHostName 'contoso.sharepoint.com' `
-        -OwnerUpn 'admin@contoso.com' -LabelDefinitionPath ./labels-definition.json -Force
+        -OwnerUpn 'admin@contoso.com' -Force
 
     Rebuilds existing pages from the same label JSON. -OwnerUpn is only consulted when
     the site has to be created, and then it must match the signed-in account.
@@ -169,7 +171,7 @@
 .EXAMPLE
     ./New-LabelTrainingSite.ps1 -SiteTitle 'Sensitivity Label Training' `
         -SiteAlias 'label-training' -TenantHostName 'contoso.sharepoint.com' `
-        -LabelDefinitionPath ./labels-definition.json -WhatIf -Verbose
+        -WhatIf -Verbose
 
     Shows every site, page and upload operation that would run, without changing anything.
 
@@ -212,22 +214,21 @@ param(
 
     [string]$Locale = 'en-US',
 
-    [string]$OverviewContentPath = 'overview-outline.md',
+    [string]$OverviewContentPath = 'dependencies/overview-outline.md',
 
-    [string]$TroubleshootingContentPath = 'troubleshooting-outline.md',
-
-    [AllowEmptyString()]
-    [string]$HomeBackgroundPath = 'Backgrounds/Home-background.jpg',
+    [string]$TroubleshootingContentPath = 'dependencies/troubleshooting-outline.md',
 
     [AllowEmptyString()]
-    [string]$LabelsBackgroundPath = 'Backgrounds/Labels-background.jpg',
+    [string]$HomeBackgroundPath = 'backgrounds/home-background.jpg',
 
     [AllowEmptyString()]
-    [string]$TroubleshootingBackgroundPath = 'Backgrounds/Troubleshooting-background.jpg',
+    [string]$LabelsBackgroundPath = 'backgrounds/labels-background.jpg',
 
-    [Parameter(Mandatory)]
+    [AllowEmptyString()]
+    [string]$TroubleshootingBackgroundPath = 'backgrounds/troubleshooting-background.jpg',
+
     [ValidateNotNullOrEmpty()]
-    [string]$LabelDefinitionPath,
+    [string]$LabelDefinitionPath = 'dependencies/labels-definition.json',
 
     [ValidatePattern('\.aspx$')]
     [string]$OverviewPageName = 'Home.aspx',
@@ -1874,7 +1875,14 @@ try {
     }
 
     $troubleshootingSections = Get-MarkdownSection -Path $troubleshootingPath -PageLabel 'Troubleshooting' -ParameterName 'TroubleshootingContentPath'
-    $labels = @(Get-LabelDefinition -Path $LabelDefinitionPath)
+    $labelDefinitionFile = if ([System.IO.Path]::IsPathRooted($LabelDefinitionPath)) {
+        $LabelDefinitionPath
+    }
+    else {
+        Join-Path $script:ScriptRoot $LabelDefinitionPath
+    }
+
+    $labels = @(Get-LabelDefinition -Path $labelDefinitionFile)
     Write-Log "Working with $($labels.Count) label(s)."
 
     # 4. Site ------------------------------------------------------------------
