@@ -22,7 +22,7 @@ label-deployment-materials/
 ├── screenshots/
 │   └── Place your screenshots here and reference in dependencies/labels-definition.json
 │
-└── Logs/ - New Logs directory will be created on initial run
+└── logs/ - New logs directory will be created on initial run
     └── New-LabelTrainingSite_yyyyMMdd-HHmmss.txt
 ```
 

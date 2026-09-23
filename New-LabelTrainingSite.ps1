@@ -144,7 +144,7 @@
     File name of the Troubleshooting & FAQ page. Default 'Troubleshooting.aspx'.
 
 .PARAMETER LogDirectory
-    Folder for the run log. Defaults to a 'Logs' folder beside this script.
+    Folder for the run log. Defaults to a 'logs' folder beside this script.
 
 .PARAMETER ProvisioningTimeoutSeconds
     How long to wait for asynchronous site provisioning. Default 600.
@@ -275,7 +275,7 @@ function Initialize-Log {
     [CmdletBinding()]
     param([string]$Directory)
 
-    if (-not $Directory) { $Directory = Join-Path $script:ScriptRoot 'Logs' }
+    if (-not $Directory) { $Directory = Join-Path $script:ScriptRoot 'logs' }
 
     if (-not (Test-Path -LiteralPath $Directory)) {
         New-Item -Path $Directory -ItemType Directory -Force | Out-Null
