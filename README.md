@@ -1,11 +1,11 @@
-# Label Deployment Materials
+# Automated Label Training SharePoint Site
 
 Builds a SharePoint Online communication site for sensitivity label training via Microsoft Graph.
 
 ## Structure
 
 ```
-label-deployment-materials/
+label-training-sharepoint-site/
 │
 ├── New-LabelTrainingSite.ps1
 │
